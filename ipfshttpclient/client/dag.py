@@ -69,3 +69,26 @@ class Section(base.SectionBase):
 
 		args = (str(cid),)
 		return self._client.request('/dag/get',args, decoder='json', **kwargs)
+		
+		
+	@base.returns_single_item
+	def resolve(self,cid,**kwargs):
+		"""Resolve ipld block.
+
+		.. code-block:: python
+
+			>>> client.dag.resolve("z8mWaJHXieAVxxLagBpdaNWFEBKVWmMiE/parents")
+			{'Cid': {'/': 'z8mWaJHXieAVxxLagBpdaNWFEBKVWmMiE'}, 'RemPath': 'parents'}
+
+		Parameters
+		----------
+		Cid : str
+			Cid
+
+		Returns
+		-------
+			dict : DAG node
+		"""
+
+		args = (str(cid),)
+		return self._client.request('/dag/resolve',args, decoder='json', **kwargs)
